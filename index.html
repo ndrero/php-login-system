@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Usuário | Minha Conta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f7f9fc;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 22px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-dropdown-btn {
+            background: none;
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .user-dropdown-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #5b6bd1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            z-index: 1;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .user-dropdown-content a {
+            color: #555;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .user-dropdown-content a:hover {
+            background-color: #f7f9fc;
+            color: #5b6bd1;
+        }
+
+        .user-dropdown-content a.logout {
+            border-top: 1px solid #eee;
+            color: #e74c3c;
+        }
+
+        .user-dropdown-content a.logout:hover {
+            background-color: #fff5f5;
+        }
+
+        .user-dropdown:hover .user-dropdown-content {
+            display: block;
+        }
+
+        .content {
+            padding-top: 80px;
+            padding-bottom: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .welcome-banner {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(110, 142, 251, 0.2);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-banner p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(255, 255, 255, 0.1)' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,224C672,213,768,171,864,165.3C960,160,1056,192,1152,202.7C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat right bottom;
+            background-size: cover;
+            opacity: 0.7;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .card-body {
+            flex: 1;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            margin-top: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5d7df9, #9666d9);
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #f7f9fc;
+            color: #5b6bd1;
+            border: 1px solid #e1e1e1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #eef1f8;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .icon-purple {
+            background-color: #a777e3;
+        }
+
+        .icon-blue {
+            background-color: #6e8efb;
+        }
+
+        .icon-teal {
+            background-color: #4fd1c5;
+        }
+
+        .icon-orange {
+            background-color: #f6ad55;
+        }
+
+        .icon-pink {
+            background-color: #ed64a6;
+        }
+
+        .icon-green {
+            background-color: #68d391;
+        }
+
+        .footer {
+            background-color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .navbar-menu .nav-link {
+                display: none;
+            }
+            
+            .welcome-banner {
+                padding: 20px;
+            }
+            
+            .welcome-banner h1 {
+                font-size: 20px;
+            }
+            
+            .welcome-banner p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">Minha Conta</a>
+        <div class="navbar-menu">
+            <a href="#" class="nav-link">Dashboard</a>
+            <a href="#" class="nav-link">Serviços</a>
+            <a href="#" class="nav-link">Suporte</a>
+            <div class="user-dropdown">
+                <button class="user-dropdown-btn">
+                    <div class="user-avatar">U</div>
+                    <span>Usuário</span>
+                </button>
+                <div class="user-dropdown-content">
+                    <a href="#">Meu Perfil</a>
+                    <a href="#">Configurações</a>
+                    <a href="#">Notificações</a>
+                    <a href="#" class="logout">Sair</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="welcome-banner">
+            <h1>Bem-vindo de volta, Usuário!</h1>
+            <p>Acesso concedido à área restrita. Aqui você tem acesso a todos os recursos exclusivos da sua conta.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-purple">📊</div>
+                <h3 class="card-title">Estatísticas</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Visualize dados importantes relacionados à sua conta e atividades recentes.</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-primary">Ver detalhes</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-blue">📁</div>
+                <h3 class="card-title">Documentos</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Acesse seus documentos importantes e arquivos compartilhados de forma segura.</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-teal">💬</div>
+                <h3 class="card-title">Mensagens</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Você tem 3 novas mensagens aguardando resposta em sua caixa de entrada.</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-primary">Ver mensagens</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-orange">⚙️</div>
+                <h3 class="card-title">Preferências</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Personalize as configurações de sua conta e gerencie suas preferências.</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-primary">Configurar</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-pink">🔒</div>
+                <h3 class="card-title">Segurança</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Gerencie as configurações de segurança da sua conta e ative a verificação em duas etapas.</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-primary">Gerenciar</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-green">📱</div>
+                <h3 class="card-title">Aplicativo</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Baixe nosso aplicativo para acesso rápido e receba notificações em tempo real.</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-primary">Download</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>©️ 2025 Minha Conta. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulação de verificação de autenticação
+            const isAuthenticated = true; // Em um ambiente real, isso seria verificado pelo servidor
+
+            if (!isAuthenticated) {
+                // Redirecionar para a página de login
+                alert('Acesso não autorizado! Em um ambiente real, você seria redirecionado para a página de login.');
+                // window.location.href = 'login.html';
+            }
+            
+            // Função para simular logout
+            const logoutLink = document.querySelector('.logout');
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Logout realizado com sucesso! Em um ambiente real, você seria redirecionado para a página de login.');
+                // window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>
