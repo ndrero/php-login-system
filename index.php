@@ -116,26 +116,5 @@
     <footer class="footer">
         <p>©️ 2025 Minha Conta. Todos os direitos reservados.</p>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Simulação de verificação de autenticação
-            const isAuthenticated = true; // Em um ambiente real, isso seria verificado pelo servidor
-
-            if (!isAuthenticated) {
-                // Redirecionar para a página de login
-                alert('Acesso não autorizado! Em um ambiente real, você seria redirecionado para a página de login.');
-                // window.location.href = 'login.html';
-            }
-            
-            // Função para simular logout
-            const logoutLink = document.querySelector('.logout');
-            logoutLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('Logout realizado com sucesso! Em um ambiente real, você seria redirecionado para a página de login.');
-                // window.location.href = 'login.html';
-            });
-        });
-    </script>
 </body>
 </html>
