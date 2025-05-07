@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if(isset($_SESSION['warning'])){
+    echo '<div id="warning" style="color: red; background-color: yellow; padding: 10px; margin-bottom: 15px;">';
+    echo $_SESSION['warning'];
+    echo '</div>';
+
+    unset($_SESSION['warning']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -150,15 +162,15 @@
         <div class="logo">
             <h1>Minha Conta</h1>
         </div>
-        <form>
+        <form method="post" action="/auth.php">
             <div class="form-group">
                 <label for="username">Nome de usuário</label>
-                <input type="text" id="username" placeholder="Digite seu nome de usuário" required autocomplete="username">
+                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required autocomplete="username">
             </div>
             <div class="form-group">
                 <label for="password">Senha</label>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Digite sua senha" required autocomplete="current-password">
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required autocomplete="current-password">
                 </div>
             </div>
             <div class="checkbox-group">
