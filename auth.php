@@ -16,7 +16,7 @@ try {
   $stmt->execute(['username' => $username]);
   $user = $stmt->fetch();
   
-  if(!$user || !$password === $user['password']){
+  if(!$user || !password_verify($password, $user['password'])){
     $_SESSION['warning'] = 'Nome de usuário ou senha incorretos';
     header('Location: login.php');
     exit;
