@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!$_SESSION['user_id']){
+    $_SESSION['warning'] = 'Você precisa estar logado para acessar a sua conta!';
+    header('Location: login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,14 +23,14 @@
             <a href="#" class="nav-link">Suporte</a>
             <div class="user-dropdown">
                 <button class="user-dropdown-btn">
-                    <div class="user-avatar">U</div>
-                    <span>Usuário</span>
+                    <div class="user-avatar"><?php echo $_SESSION['user_name'][0] ?></div>
+                    <span><?php echo $_SESSION['user_name'] ?></span>
                 </button>
                 <div class="user-dropdown-content">
                     <a href="#">Meu Perfil</a>
                     <a href="#">Configurações</a>
                     <a href="#">Notificações</a>
-                    <a href="#" class="logout">Sair</a>
+                    <a href="logout.php" class="logout">Sair</a>
                 </div>
             </div>
         </div>
@@ -30,7 +38,7 @@
 
     <div class="content">
         <div class="welcome-banner">
-            <h1>Bem-vindo de volta, Usuário!</h1>
+            <h1>Bem-vindo de volta, <?php echo $_SESSION['user_name'] ?>!</h1>
             <p>Acesso concedido à área restrita. Aqui você tem acesso a todos os recursos exclusivos da sua conta.</p>
         </div>
 

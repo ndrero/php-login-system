@@ -1,9 +1,21 @@
+<?php
+session_start();
+
+if(isset($_SESSION['warning'])){
+    echo '<div class="alert alert-danger" role="alert">';
+    echo $_SESSION['warning'];
+    echo '</div>';
+    unset($_SESSION['warning']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Minha Conta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,6 +28,7 @@
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
@@ -150,15 +163,15 @@
         <div class="logo">
             <h1>Minha Conta</h1>
         </div>
-        <form>
+        <form method="post" action="/auth.php">
             <div class="form-group">
                 <label for="username">Nome de usuário</label>
-                <input type="text" id="username" placeholder="Digite seu nome de usuário" required autocomplete="username">
+                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required autocomplete="username">
             </div>
             <div class="form-group">
                 <label for="password">Senha</label>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Digite sua senha" required autocomplete="current-password">
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required autocomplete="current-password">
                 </div>
             </div>
             <div class="checkbox-group">
