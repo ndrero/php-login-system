@@ -6,7 +6,7 @@
 // Se nao, digo que algum dos dois esta errado
 
 session_start();
-include_once './config.php';
+include_once './db.php';
 
 $username = $_POST['username'];
 $password = trim($_POST['password']);
