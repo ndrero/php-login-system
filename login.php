@@ -179,7 +179,7 @@ if(isset($_SESSION['warning'])){
                 <label for="remember">Permanecer conectado</label>
             </div>
             <div class="forgot-password">
-                <a href="#">Esqueceu sua senha?</a>
+                <a href="esqueci_senha.php">Esqueceu sua senha?</a>
             </div>
             <button type="submit" class="btn-login">Entrar</button>
         </form>

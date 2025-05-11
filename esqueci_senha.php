@@ -180,7 +180,7 @@
             </div>
             <button type="submit" class="btn-submit">Enviar instruções</button>
             <div class="back-link">
-                <a href="#">Voltar para o login</a>
+                <a href="login.php">Voltar para o login</a>
             </div>
         </form>
     </div>
