@@ -19,6 +19,8 @@ try {
     $mail->Password = $_ENV['MAIL_PASSWORD']; 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = 465;
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
 } catch (Exception $e) {
     echo "Erro na configuração do e-mail: {$mail->ErrorInfo}"; 
 }
