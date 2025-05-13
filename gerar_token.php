@@ -1,7 +1,5 @@
 <?php
 
-include_once './db.php';
-
 function criar_token($id){
     global $pdo;
 
