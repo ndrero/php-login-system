@@ -1,3 +1,9 @@
+<?php 
+
+session_start();
+include_once 'verificar_token.php';
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
