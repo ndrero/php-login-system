@@ -1,10 +1,12 @@
 <?php
 session_start();
 if(isset($_SESSION['warning'])){
-    echo '<div class="alert alert-danger" role="alert">';
-    echo $_SESSION['warning'];
-    echo '</div>';
+    echo '<div class="alert alert-danger" role="alert">'.$_SESSION['warning'].'</div>';
     unset($_SESSION['warning']);
+}
+if(isset($_SESSION['success'])){
+    echo '<div class="alert alert-success" role="alert">'.$_SESSION['success'].'</div>';
+    unset($_SESSION['success']);
 }
 ?>
 

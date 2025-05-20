@@ -30,9 +30,13 @@ function enviarEmail($pdo, $mail){
         $mail->Body = "Recupere sua senha através do link: http://localhost:8080/atualizar_senha.php?token={$token}";
 
         $mail->send();
-        echo 'E-mail enviado com sucesso!';
+        $_SESSION['success'] = 'E-mail enviado com sucesso!';
+        header('Location: login.php');
+        exit();
     } catch (Exception $e) {
-        echo 'Erro ao enviar email: ' . $mail->ErrorInfo;
+        $_SESSION['error'] = 'Erro ao enviar email: ' . $mail->ErrorInfo;
+        header('Location: login.php');
+        exit();
     }
 }
 
