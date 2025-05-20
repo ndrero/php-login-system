@@ -16,6 +16,10 @@ if(!$token) {
 
 if(strtotime($token['expires_at']) < time()) {
     $_SESSION['warning'] = 'Token expirado';
+
+    $stmt = $pdo->prepare('DELETE FROM tokens WHERE id = :id');
+    $stmt->execute([':id' => $token['id']]);
+
     header('Location: esqueci_senha.php');
     exit();
 }
