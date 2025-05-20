@@ -14,7 +14,7 @@ if(isset($_SESSION['warning'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Minha Conta</title>
+    <title>Recuperação de Senha | Minha Conta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
@@ -58,6 +58,24 @@ if(isset($_SESSION['warning'])){
             font-size: 28px;
         }
 
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            color: #5b6bd1;
+            font-weight: 600;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
         .form-group {
             margin-bottom: 20px;
             position: relative;
@@ -86,48 +104,7 @@ if(isset($_SESSION['warning'])){
             box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.2);
         }
 
-        .password-container {
-            position: relative;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .checkbox-group input {
-            margin-right: 10px;
-            cursor: pointer;
-            width: 18px;
-            height: 18px;
-            accent-color: #6e8efb;
-        }
-
-        .checkbox-group label {
-            color: #555;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-
-        .forgot-password a {
-            color: #6e8efb;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .forgot-password a:hover {
-            color: #a777e3;
-            text-decoration: underline;
-        }
-
-        .btn-login {
+        .btn-submit {
             width: 100%;
             padding: 15px;
             background: linear-gradient(135deg, #6e8efb, #a777e3);
@@ -138,18 +115,57 @@ if(isset($_SESSION['warning'])){
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
 
-        .btn-login:hover {
+        .btn-submit:hover {
             background: linear-gradient(135deg, #5d7df9, #9666d9);
             transform: translateY(-2px);
             box-shadow: 0 7px 14px rgba(110, 142, 251, 0.2);
         }
 
-        .btn-login:active {
+        .btn-submit:active {
             transform: translateY(0);
         }
+
+        .back-link {
+            text-align: center;
+        }
+
+        .back-link a {
+            color: #6e8efb;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .back-link a:hover {
+            color: #a777e3;
+            text-decoration: underline;
+        }
+
+        .back-link a:before {
+            content: "←";
+            margin-right: 5px;
+            font-size: 16px;
+        }
         
+        .info-box {
+            background-color: rgba(110, 142, 251, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #6e8efb;
+        }
+        
+        .info-box p {
+            color: #5b6bd1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
@@ -163,25 +179,22 @@ if(isset($_SESSION['warning'])){
         <div class="logo">
             <h1>Minha Conta</h1>
         </div>
-        <form method="post" action="/auth.php">
-            <div class="form-group">
-                <label for="username">Nome de usuário</label>
-                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required autocomplete="username">
+        <div class="header">
+            <h2>Recuperação de Senha</h2>
+            <p>Informe seu e-mail cadastrado abaixo para receber as instruções de recuperação de senha</p>
+        </div>
+        <form method="post" action="processar_email.php">
+            <div class="info-box">
+                <p>Enviaremos um link de recuperação para o seu e-mail. Verifique também sua pasta de spam.</p>
             </div>
             <div class="form-group">
-                <label for="password">Senha</label>
-                <div class="password-container">
-                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required autocomplete="current-password">
-                </div>
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required autocomplete="email">
             </div>
-            <div class="checkbox-group">
-                <input type="checkbox" id="remember">
-                <label for="remember">Permanecer conectado</label>
+            <button type="submit" class="btn-submit">Enviar instruções</button>
+            <div class="back-link">
+                <a href="login.php">Voltar para o login</a>
             </div>
-            <div class="forgot-password">
-                <a href="esqueci_senha.php">Esqueceu sua senha?</a>
-            </div>
-            <button type="submit" class="btn-login">Entrar</button>
         </form>
     </div>
 </body>

@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-include_once 'verificar_token.php';
+require_once __DIR__ . '/../src/verificar_token.php';
 
 ?>
 <!DOCTYPE html>

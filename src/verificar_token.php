@@ -1,6 +1,6 @@
 <?php
 
-include_once 'db.php';
+require_once __DIR__ . '/../config/db.php';
 
 $tokenFromURL = $_GET['token'];
 

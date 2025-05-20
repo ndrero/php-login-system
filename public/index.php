@@ -2,7 +2,7 @@
 session_start();
 if(!$_SESSION['user_id']){
     $_SESSION['warning'] = 'Você precisa estar logado para acessar a sua conta!';
-    header('Location: login.php');
+    header('Location: ./login.php');
 }
 ?>
 
@@ -30,7 +30,7 @@ if(!$_SESSION['user_id']){
                     <a href="#">Meu Perfil</a>
                     <a href="#">Configurações</a>
                     <a href="#">Notificações</a>
-                    <a href="logout.php" class="logout">Sair</a>
+                    <a href="./processar_logout.php" class="logout">Sair</a>
                 </div>
             </div>
         </div>
