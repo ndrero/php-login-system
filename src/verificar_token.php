@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/db.php';
 
 $tokenFromURL = $_GET['token'];
 
-$stmt = $pdo->prepare('SELECT id, expires_at FROM tokens WHERE token = :token');
+$stmt = $pdo->prepare('SELECT id, user_id, expires_at FROM tokens WHERE token = :token');
 $stmt->execute([':token' => $tokenFromURL]);
 $token = $stmt->fetch();
 
@@ -23,3 +23,5 @@ if(strtotime($token['expires_at']) < time()) {
     header('Location: esqueci_senha.php');
     exit();
 }
+
+$_SESSION['user_id'] = $token['user_id'];

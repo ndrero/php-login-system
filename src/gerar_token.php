@@ -1,8 +1,7 @@
 <?php
 
-function criar_token($id){
-    global $pdo;
-
+function criar_token($id, $pdo){
+    
     try {
         $token = bin2hex(random_bytes(16));
 

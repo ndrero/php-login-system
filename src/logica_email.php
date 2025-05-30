@@ -20,7 +20,7 @@ function enviarEmail($pdo, $mail){
         exit();
     }
 
-    $token = criar_token($user['id']);
+    $token = criar_token($user['id'], $pdo);
 
     try {
         $mail->setFrom($_ENV['MAIL_USERNAME'], 'Meu aplicativo');
