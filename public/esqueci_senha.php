@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+$title = 'Recuperação de Senha | Minha Conta';
+$css = '<link rel="stylesheet" href="assets/css/styles/esqueci_senha.css">';
+include 'header.php';
+
 if(isset($_SESSION['warning'])){
     echo '<div class="alert alert-danger" role="alert">';
     echo $_SESSION['warning'];
@@ -9,17 +13,6 @@ if(isset($_SESSION['warning'])){
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperação de Senha | Minha Conta</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles/esqueci_senha.css">
-
-</head>
-<body>
     <div class="container">
         <div class="logo">
             <h1>Minha Conta</h1>

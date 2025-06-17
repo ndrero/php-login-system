@@ -4,18 +4,11 @@ if(!$_SESSION['user_id']){
     $_SESSION['warning'] = 'Você precisa estar logado para acessar a sua conta!';
     header('Location: ./login.php');
 }
+$title = 'Área do Usuário | Minha Conta';
+$css = '<link rel="stylesheet" href="assets/css/styles/index.css">';
+include 'header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área do Usuário | Minha Conta</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles/index.css">
-</head>
-<body>
     <nav class="navbar">
         <a href="#" class="navbar-brand">Minha Conta</a>
         <div class="navbar-menu">
@@ -121,10 +114,4 @@ if(!$_SESSION['user_id']){
         </div>
     </div>
 
-    <footer class="footer">
-        <p>©️ 2025 Minha Conta. Todos os direitos reservados.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php include 'footer.php'?>
