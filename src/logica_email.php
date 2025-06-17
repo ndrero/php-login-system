@@ -27,7 +27,7 @@ function enviarEmail($pdo, $mail){
         $mail->addAddress($email, $user['name']);
         $mail->isHTML(true);
         $mail->Subject = 'Recuperação de senha';
-        $mail->Body = "Recupere sua senha através do link: http://localhost:8080/atualizar_senha.php?token={$token}";
+        $mail->Body = "Recupere sua senha através do link: {$_ENV['APP_URL']}/atualizar_senha.php?token={$token}";
 
         $mail->send();
         $_SESSION['success'] = 'E-mail enviado com sucesso!';
