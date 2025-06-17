@@ -9,6 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password']) && isset(
     $senha = $_POST['password'];
     $senhaConfirmada = $_POST['confirmPassword'];
 
+    if(!verificarConfirmacaoSenha($senha,$senhaConfirmada)){
+        $_SESSION['warning'] = 'A confirmação da senha não confere.';
+        header("Location: atualizar_senha.php?token={$_SESSION['token']}");
+        exit;
+    }
+
     $forca = verificarForcaDaSenha($senha);
     if($forca < 4) {
         $_SESSION['warning'] = 'A senha não é forte o suficiente.';
@@ -16,11 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password']) && isset(
         exit;
     }
 
-    if(!verificarConfirmacaoSenha($senha,$senhaConfirmada)){
-        $_SESSION['warning'] = 'A confirmação da senha não confere.';
-        header("Location: atualizar_senha.php?token={$_SESSION['token']}");
-        exit;
-    }
     salvarSenha($senha, $pdo);
     unset($_SESSION['token']);
     $_SESSION['success'] = 'Senha atualizada com sucesso!';
